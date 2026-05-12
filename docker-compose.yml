@@ -1,71 +1,49 @@
-name: CI
+services:
+  traefik:
+    image: traefik:v2.10
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - sandobox_network
 
-on:
-  push:
-    branches:
-      - main
-      - dev
-      - '*devops*'
+  postgres:
+    image: postgres:17-alpine
+    env_file: .env
+    environment:
+      - POSTGRES_USER=${PG_USER}
+      - POSTGRES_PASSWORD=${PG_PASS}
+      - POSTGRES_DB=${PG_DB}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "${PG_PORT}:5432"
+    networks:
+      - sandobox_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${PG_USER} -d ${PG_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
 
-permissions:
-  contents: read
+  pgadmin:
+    image: dpage/pgadmin4:8
+    ports:
+      - "${PGADMIN_PORT}:80"
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
+    depends_on:
+      - postgres
+    networks:
+      - sandobox_network
 
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - service: api
-            path: my_memo_master_api
-          - service: front
-            path: my_memo_master_front
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-          cache-dependency-path: ${{ matrix.path }}/package-lock.json
-
-      - name: Install Dependencies
-        working-directory: ${{ matrix.path }}
-        run: npm ci
-
-      - name: Run Tests
-        working-directory: ${{ matrix.path }}
-        run: npm run test
-
-  lint:
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - service: api
-            path: my_memo_master_api
-          - service: front
-            path: my_memo_master_front
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-          cache-dependency-path: ${{ matrix.path }}/package-lock.json
-
-      - name: Install Dependencies
-        working-directory: ${{ matrix.path }}
-        run: npm ci
-
-      - name: Run Lint
-        working-directory: ${{ matrix.path }}
-        run: npm run lint
-        
