@@ -47,3 +47,7 @@ services:
     networks:
       - sandobox_network
 
+networks:
+  sandobox_network:
+    driver: bridge
+
