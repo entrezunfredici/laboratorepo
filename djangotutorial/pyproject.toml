@@ -1,0 +1,30 @@
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+
+[tool.ruff.lint]
+# E/W = pycodestyle, F = pyflakes, I = isort, N = pep8-naming, UP = pyupgrade
+select = ["E", "F", "W", "I", "N", "UP"]
+ignore = [
+    "E501",   # line too long (handled by formatter)
+]
+# Ignore unused `request` parameter — required by Django view signatures
+per-file-ignores = { "polls/views.py" = ["ARG001"] }
+
+[tool.ruff.lint.isort]
+known-first-party = ["polls", "mysite"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.coverage.run]
+source = ["polls"]
+omit = ["*/migrations/*", "*/tests*", "manage.py"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = false
+
+[tool.coverage.xml]
+output = "coverage.xml"
