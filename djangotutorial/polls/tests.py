@@ -12,7 +12,7 @@ Test coverage:
 
 import datetime
 
-from django.test import Client, TestCase
+from django.test import TestCase
 from django.urls import reverse
 from django.utils import timezone
 
