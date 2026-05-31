@@ -1,0 +1,15 @@
+{
+  "name": "labapi",
+  "version": "1.0.0",
+  "description": "experimental api",
+  "license": "ISC",
+  "author": "fredissimo*",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}

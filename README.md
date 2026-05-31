@@ -281,3 +281,14 @@ push / pull_request
 | 21/05/2026 | Création de la branche `django`, initialisation du projet, application des migrations initiales, création de l'app `polls` avec une première vue et son routage |
 | 25/05/2026 | Ajout des modèles `Question` et `Choice`, 4 vues complètes, 26 tests unitaires documentés, linter ruff, migration initiale, CI adapté Python/Django avec coverage, analyse SonarQube |
 
+
+creation d'une api express
+
+mkdir labapi
+cd labapi
+
+npm init
+
+npm install express
+
+ajout de snodes modules dans le gitignore
