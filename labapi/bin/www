@@ -1,0 +1,24 @@
+#!/usr/bin/env node
+const http = require("http");
+const app = require("../app");
+
+const port = process.env.PORT || process.env.API_PORT || 8080;
+
+const server = http.createServer(app);
+
+server.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
+});
+
+server.on("error", (error) => {
+  if (error.syscall !== "listen") throw error;
+  if (error.code === "EACCES") {
+    console.error(`Port ${port} requires elevated privileges`);
+    process.exit(1);
+  }
+  if (error.code === "EADDRINUSE") {
+    console.error(`Port ${port} is already in use`);
+    process.exit(1);
+  }
+  throw error;
+});

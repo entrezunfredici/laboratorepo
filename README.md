@@ -292,3 +292,9 @@ npm init
 npm install express
 
 ajout de snodes modules dans le gitignore
+
+ajout des dépendances bcrypt
+
+creation du modèle todo
+
+

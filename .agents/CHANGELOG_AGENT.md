@@ -18,6 +18,8 @@
 
 > Mis à jour après chaque ticket. Reflète l'état actuel.
 
+### Django (`djangotutorial/`)
+
 | Module                        | État   | Dernière modif     |
 | ----------------------------- | ------ | ------------------ |
 | `polls/models.py`             | Stable | Phase 2 — 25/05/26 |
@@ -42,6 +44,28 @@
 - Templates HTML (étape 3+ du tutoriel Django officiel)
 - Interface admin personnalisée (au-delà de l'enregistrement basique)
 - Authentification / permissions utilisateurs
+
+---
+
+### Node.js API (`labapi/`)
+
+| Module                        | État      | Dernière modif     |
+| ----------------------------- | --------- | ------------------ |
+| `labapi/models/index.js`      | Stable    | Phase 1 — 31/05/26 |
+| `labapi/models/User.model.js` | Stable    | Phase 1 — 31/05/26 |
+| `labapi/models/Todo.model.js` | Stable    | Phase 1 — 31/05/26 |
+| `labapi/app.js`               | Squelette | Généré Express     |
+
+**Modules implémentés et stables :**
+- `models/User.model.js` — modèle Sequelize User : `userId`, `email`, `name`, `password`, `createdAt`, `updatedAt` + association `hasMany(Todo)`
+- `models/Todo.model.js` — modèle Sequelize Todo : `idTodo`, `todoName`, `todoText`, `completed`, `userId (FK)` + association `belongsTo(User)`
+- `models/index.js` — initialise Sequelize, charge les modèles, applique les associations, exporte `{ sequelize, User, Todo }`
+
+**Ce qui n'existe pas encore :**
+- Routes Express (`/users`, `/todos`)
+- Contrôleurs (logique CRUD)
+- Middleware d'authentification
+- Séquelize non installé — `npm install sequelize mysql2` requis avant de lancer
 
 ---
 

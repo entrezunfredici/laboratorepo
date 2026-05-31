@@ -1,15 +1,27 @@
 {
   "name": "labapi",
-  "version": "1.0.0",
-  "description": "experimental api",
-  "license": "ISC",
-  "author": "fredissimo*",
-  "type": "commonjs",
-  "main": "index.js",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "test"
+    "start": "node ./bin/www",
+    "dev": "nodemon ./bin/www",
+    "seed": "node ./seeders/seed.js",
+    "test": "jest --runInBand"
   },
   "dependencies": {
-    "express": "^5.2.1"
+    "bcryptjs": "^3.0.3",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "^4.22.2",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.1",
+    "sequelize": "^6.37.3",
+    "sqlite3": "^5.1.7",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.4"
   }
 }

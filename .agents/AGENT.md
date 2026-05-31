@@ -54,6 +54,14 @@ Si une dépendance supposée présente est absente, pose la question. Ne l'impl�
 - N'ajoute pas de dépendance externe sans la signaler et justifier le choix.
 - Si tu détectes un problème dans un module adjacent, **signale-le dans un commentaire `TODO`** plutôt que de le corriger silencieusement.
 
+### Après chaque modification du code — obligatoire
+
+Ces deux actions sont **non-négociables** après toute création ou modification de fichier de code :
+
+1. **Mettre à jour `CHANGELOG_AGENT.md`** — documenter les fichiers touchés, ce qui est désormais utilisable, les hypothèses posées et la dette éventuelle. Ne pas attendre la fin du ticket : mettre à jour au fil des modifications.
+
+2. **Mettre à jour `README.md`** — refléter tout changement visible de l'extérieur : nouvelles commandes, nouveaux endpoints, nouveaux modèles, changement de structure, prérequis modifiés. Si rien de public n'a changé, ajouter au minimum la date dans l'historique.
+
 ### En cas d'ambiguïté
 
 - Priorité : respecter l'architecture définie > respect des conventions > performance > concision du code.
@@ -137,8 +145,8 @@ Checklist avant de considérer un ticket terminé :
 - [ ] Tests unitaires (nominal + limites + erreurs)
 - [ ] Linter passe sans erreur
 - [ ] `DECISIONS.md` mis à jour si un choix structurant a été fait
-- [ ] `README.md` mis à jour si un comportement public change
-- [ ] `CHANGELOG_AGENT.md` mis à jour — fichiers créés/modifiés, ce qui est utilisable, hypothèses posées, dette éventuelle
+- [ ] `README.md` mis à jour — **obligatoire après toute modification du code**, sans exception
+- [ ] `CHANGELOG_AGENT.md` mis à jour — **obligatoire après toute modification du code** : fichiers créés/modifiés, ce qui est utilisable, hypothèses posées, dette éventuelle
 
 ---
 
